@@ -1,0 +1,9 @@
+.modal-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .input {
+       margin-bottom: 10px;
+    }
+}
