@@ -25,7 +25,6 @@ function App() {
       <Depenses 
         setIsAddDepenseOpen = {setIsAddDepenseOpen} 
         setIsEditDepenseOpen = {setIsEditDepenseOpen}
-        depenses = {depenses}
         filteredDepenses = {filteredDepenses} 
       />
       <AddDepense 

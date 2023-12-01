@@ -35,9 +35,14 @@
         align-items: center;
         overflow: hidden;
         text-overflow: ellipsis;
+        border-bottom: 1px solid black;
 
-        .actions, .date, .amount {
+        .actions, .amount {
             width: 10%;
+        }
+
+        .date {
+            width: 20%;
         }
 
         .actions {
@@ -55,15 +60,14 @@
         }
 
         .libelle {
-            width: 50%;
+            width: 40%;
         }
 
     }
 
     &__row.head {
         font-weight: bold;
-        border-bottom: 1px solid black;
         background-color: hsl(171, 59%, 72%);
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }

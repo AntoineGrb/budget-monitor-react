@@ -6,9 +6,9 @@ import {tags} from '../../data/tags'
 const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen , depenses, setDepenses}) => {
 
     //Déclaration des states des inputs de la modale
-    const [depenseDate , setDepenseDate] = useState('');
+    const [depenseDate , setDepenseDate] = useState('2023-12-01');
     const [depenseLibelle , setDepenseLibelle] = useState('');
-    const [depenseTag , setDepenseTag] = useState('');
+    const [depenseTag , setDepenseTag] = useState('Autres');
     const [depenseAmount , setDepenseAmount] = useState(1);
 
     const submitForm = (e) => {
@@ -35,9 +35,9 @@ const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen , depenses, setDepen
 
     const closeModal = () => {
         //Rénitialiser et fermer le formulaire
-        setDepenseDate('');
+        setDepenseDate('2023-12-01');
         setDepenseLibelle('');
-        setDepenseTag('');
+        setDepenseTag('Autres');
         setDepenseAmount(1);
         setIsAddDepenseOpen(false);
     }
@@ -59,7 +59,7 @@ const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen , depenses, setDepen
                             <label> Type de dépense : </label>
                             <select value={depenseTag} onChange={(e) => setDepenseTag(e.target.value)} className="select" name="tag" id="tag">
                                 {tags.map((tag , index)=> (
-                                    <option key={index} value={tag}> {tag} </option>
+                                    <option key={index} value={tag.name}> {tag.name} </option>
                                 ))}
                             </select>
                             <label> Montant (€) : </label>

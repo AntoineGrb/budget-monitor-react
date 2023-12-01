@@ -1,9 +1,17 @@
 import './Depenses.scss'
 import PropTypes from 'prop-types'
+import {tags} from '../../data/tags'
 
-const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses}) => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses}) => {
 
-    console.log(depenses)
+    const displayTagColor = (tagName) => {
+        console.log(tagName)
+        const tag = tags.find(tag => tag.name === tagName);
+        console.log(tag)
+        return tag.color
+    }
+
+    console.log(filteredDepenses)
 
     return (
         <>
@@ -21,16 +29,20 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses}) => {
                         <div className="header amount">Montant</div>
                     </div>
 
-                    <div className="board__row content">
-                        <div className="cell actions">
-                            <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
-                            <i className="fa-regular fa-trash-can"></i>
+                    {filteredDepenses.map((depense , index) => (
+                        <div key={index} className="board__row">
+                            <div className="cell actions">
+                                <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
+                                <i className="fa-regular fa-trash-can"></i>
+                            </div>
+                            <div className="cell date">{depense.date}</div>
+                            <div className="cell libelle">{depense.libelle}</div>
+                            <div className="cell etiquette"><div className={`tag ${displayTagColor(depense.tag)}`}> {depense.tag} </div></div>
+                            <div className="cell amount">{depense.amount}€</div>
                         </div>
-                        <div className="cell date">22/3</div>
-                        <div className="cell libelle">Starbucks</div>
-                        <div className="cell etiquette"><div className="tag is-black"> Food </div></div>
-                        <div className="cell amount">20€</div>
-                    </div>
+                    ))}
+
+                    
                 </div>
             </section>
         </>
@@ -40,7 +52,7 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses}) => {
 Depenses.propTypes = {
     setIsAddDepenseOpen: PropTypes.func,
     setIsEditDepenseOpen: PropTypes.func,
-    depenses: PropTypes.array
+    filteredDepenses: PropTypes.array
 }
 
 
