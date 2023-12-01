@@ -1,4 +1,5 @@
 import './AddDepense.scss'
+import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import {tags} from '../../data/tags'
@@ -28,6 +29,19 @@ const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen , depenses, setDepen
 
         //L'ajouter au tableau
         setDepenses([...depenses , newDepense])
+
+        //Toast succes de la demande
+        const notify = () => toast.success("Dépense ajoutée !" , {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+        });
+        notify()
 
         //Rénitialiser et fermer le formulaire
         closeModal()
@@ -79,7 +93,7 @@ AddDepense.propTypes = {
     isAddDepenseOpen: PropTypes.bool,
     setIsAddDepenseOpen: PropTypes.func,
     setDepenses: PropTypes.func,
-    depenses : PropTypes.array
+    depenses : PropTypes.array,
 }
 
 export default AddDepense

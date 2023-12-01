@@ -7,5 +7,5 @@ export const tags = [
     {name:'Sortie' , color:'is-info'},
     {name:'Santé' , color:'is-primary'},
     {name:'Hobbies' , color:'is-link'},
-    {name:'Autres' , color:'is-light'},
+    {name:'Autres' , color:'is-black'},
 ]
