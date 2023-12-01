@@ -5,9 +5,17 @@ import {months , years } from '../../data/time-units'
 
 const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
 
+    //Obtenir la date du jour pour les valeurs par défaut
+    const getTodayDate = () => {
+        const today = new Date;
+        const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+        const currentYear = today.getFullYear().toString();
+        return {currentMonth , currentYear}
+    }
+
     //Déclaration des states locaux 
-    const [month , setMonth] = useState('01');
-    const [year , setYear] = useState('2023');
+    const [month , setMonth] = useState(getTodayDate().currentMonth); //Date du jour par défaut
+    const [year , setYear] = useState(getTodayDate().currentYear);
     const [salary , setSalary] = useState(2300);
     const [otherIncomes, setOtherIncomes] = useState(0)
 
@@ -41,6 +49,11 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
         const monthToDisplay = months[parseInt(month) - 1] //month est le state du mois sélectionné format '01' et le mois JS commence à partir de 0
         return monthToDisplay.name
     }
+
+    useEffect(() => {
+        getTodayDate()
+    }, [])
+
     
     return (
         <>
