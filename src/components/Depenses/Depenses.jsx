@@ -1,11 +1,12 @@
 import './Depenses.scss'
+import PropTypes from 'prop-types'
 
-const Depenses = () => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
     return (
         <>
             <header className="depenses-header">
                 <h1> Mes dépenses </h1>
-                <button className="button"> <i className="fa-regular fa-square-plus"></i> Ajouter une dépense </button>
+                <button onClick={() => setIsAddDepenseOpen(true)} className="button"> <i className="fa-regular fa-square-plus"></i> Ajouter une dépense </button>
             </header>
             <section className="depenses-panel">
                 <div className="board ">
@@ -19,7 +20,7 @@ const Depenses = () => {
 
                     <div className="board__row content">
                         <div className="cell actions">
-                            <i className="fa-regular fa-pen-to-square"></i> 
+                            <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
                             <i className="fa-regular fa-trash-can"></i>
                         </div>
                         <div className="cell date">22/3</div>
@@ -32,5 +33,12 @@ const Depenses = () => {
         </>
     )
 }
+
+Depenses.propTypes = {
+    setIsAddDepenseOpen: PropTypes.func,
+    setIsEditDepenseOpen: PropTypes.func
+}
+
+
 
 export default Depenses

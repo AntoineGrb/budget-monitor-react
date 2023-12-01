@@ -1,15 +1,23 @@
 import './App.scss'
+import { useState } from 'react'
 import Budget from './components/Budget/Budget'
 import Depenses from './components/Depenses/Depenses'
 import AddDepense from './components/Modals/AddDepense'
+import EditDepense from './components/Modals/EditDepense'
 
 function App() {
+
+  //Déclaration des states
+  //Gestion des modales
+  const [isAddDepenseOpen , setIsAddDepenseOpen] = useState(false);
+  const [isEditDepenseOpen , setIsEditDepenseOpen] = useState(false);
 
   return (
     <main>
       <Budget />
-      <Depenses />
-      <AddDepense />
+      <Depenses setIsAddDepenseOpen = {setIsAddDepenseOpen} setIsEditDepenseOpen = {setIsEditDepenseOpen} />
+      <AddDepense isAddDepenseOpen = {isAddDepenseOpen} setIsAddDepenseOpen = {setIsAddDepenseOpen} />
+      <EditDepense isEditDepenseOpen = {isEditDepenseOpen} setIsEditDepenseOpen = {setIsEditDepenseOpen} />
     </main>
   )
 }

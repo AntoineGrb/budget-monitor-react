@@ -1,12 +1,15 @@
 import './AddDepense.scss'
+import PropTypes from 'prop-types'
 
-const AddDepense = () => {
+
+const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen}) => {
     return (
-            <div className="modal"> 
-                <div className="modal-background"></div>
+            <div className={`modal ${isAddDepenseOpen && 'is-active'}`}> 
+                <div onClick={() => setIsAddDepenseOpen(false)} className="modal-background"></div>
                 <div className="modal-card">
                     <header className="modal-card-head">
                         <p className="modal-card-title"> Ajouter une dépense </p>
+                        <button onClick={() => setIsAddDepenseOpen(false)} className="delete"></button>
                     </header>
                     <section className="modal-card-body">
                         <label> Date de la dépense : </label>
@@ -23,12 +26,16 @@ const AddDepense = () => {
                     </section>
                     <footer className="modal-card-foot">
                         <button className="button"> Valider </button>
-                        <button className="button"> Annuler </button>
+                        <button onClick={() => setIsAddDepenseOpen(false)} className="button"> Annuler </button>
                     </footer>
                 </div>
-                <button className="modal-close"></button>
             </div>
     )
+}
+
+AddDepense.propTypes = {
+    isAddDepenseOpen: PropTypes.bool,
+    setIsAddDepenseOpen: PropTypes.func
 }
 
 export default AddDepense
