@@ -1,0 +1,1 @@
+export const tags = ['Repas' , 'Courses' , 'Charges' , 'Sortie' , 'Santé' , 'Hobbies']

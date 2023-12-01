@@ -1,33 +1,75 @@
 import './AddDepense.scss'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
+import {tags} from '../../data/tags'
 
+const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen , depenses, setDepenses}) => {
 
-const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen}) => {
+    //Déclaration des states des inputs de la modale
+    const [depenseDate , setDepenseDate] = useState('');
+    const [depenseLibelle , setDepenseLibelle] = useState('');
+    const [depenseTag , setDepenseTag] = useState('');
+    const [depenseAmount , setDepenseAmount] = useState(1);
+
+    const submitForm = (e) => {
+        e.preventDefault();
+
+        if (depenseAmount == 0) {
+            return
+        }
+
+        //Enregistrer la nouvelle dépense
+        const newDepense = {
+            date:depenseDate,
+            libelle:depenseLibelle,
+            tag:depenseTag,
+            amount:parseInt(depenseAmount)
+        }
+
+        //L'ajouter au tableau
+        setDepenses([...depenses , newDepense])
+
+        //Rénitialiser et fermer le formulaire
+        closeModal()
+    }
+
+    const closeModal = () => {
+        //Rénitialiser et fermer le formulaire
+        setDepenseDate('');
+        setDepenseLibelle('');
+        setDepenseTag('');
+        setDepenseAmount(1);
+        setIsAddDepenseOpen(false);
+    }
+
     return (
             <div className={`modal ${isAddDepenseOpen && 'is-active'}`}> 
-                <div onClick={() => setIsAddDepenseOpen(false)} className="modal-background"></div>
+                <div className="modal-background"></div>
                 <div className="modal-card">
-                    <header className="modal-card-head">
-                        <p className="modal-card-title"> Ajouter une dépense </p>
-                        <button onClick={() => setIsAddDepenseOpen(false)} className="delete"></button>
-                    </header>
-                    <section className="modal-card-body">
-                        <label> Date de la dépense : </label>
-                        <input className="input" type="date" name="date" id="date" />
-                        <label> Libellé de la dépense : </label>
-                        <input className="input" type="text" name="libelle" id="libelle" />
-                        <label> Type de dépense : </label>
-                        <select className="select" name="tag" id="tag">
-                            <option value="food"> Food </option>
-                            <option value="out"> Sortie </option>
-                        </select>
-                        <label> Montant (€) : </label>
-                        <input className="input" type="number" name="amount" id="amount" />
-                    </section>
-                    <footer className="modal-card-foot">
-                        <button className="button"> Valider </button>
-                        <button onClick={() => setIsAddDepenseOpen(false)} className="button"> Annuler </button>
-                    </footer>
+                    <form onSubmit={(e) => submitForm(e)}>
+                        <header className="modal-card-head">
+                            <p className="modal-card-title"> Ajouter une dépense </p>
+                            <button onClick={closeModal} className="delete"></button>
+                        </header>
+                        <section className="modal-card-body">
+                            <label> Date de la dépense : </label>
+                            <input value={depenseDate} onChange={(e) => setDepenseDate(e.target.value)} className="input" type="date" name="date" id="date" required />
+                            <label> Libellé de la dépense : </label>
+                            <input value={depenseLibelle} onChange={(e) => setDepenseLibelle(e.target.value)} className="input" type="text" name="libelle" id="libelle" required />
+                            <label> Type de dépense : </label>
+                            <select value={depenseTag} onChange={(e) => setDepenseTag(e.target.value)} className="select" name="tag" id="tag">
+                                {tags.map((tag , index)=> (
+                                    <option key={index} value={tag}> {tag} </option>
+                                ))}
+                            </select>
+                            <label> Montant (€) : </label>
+                            <input value={depenseAmount} onChange={(e) => setDepenseAmount(e.target.value)} className="input" type="number" name="amount" id="amount" min="1" required />
+                        </section>
+                        <footer className="modal-card-foot">
+                            <button type="submit" className="button"> Valider </button>
+                            <button type='button' onClick={closeModal} className="button"> Annuler </button>
+                        </footer>
+                    </form>
                 </div>
             </div>
     )
@@ -35,7 +77,9 @@ const AddDepense = ({isAddDepenseOpen , setIsAddDepenseOpen}) => {
 
 AddDepense.propTypes = {
     isAddDepenseOpen: PropTypes.bool,
-    setIsAddDepenseOpen: PropTypes.func
+    setIsAddDepenseOpen: PropTypes.func,
+    setDepenses: PropTypes.func,
+    depenses : PropTypes.array
 }
 
 export default AddDepense

@@ -1,7 +1,10 @@
 import './Depenses.scss'
 import PropTypes from 'prop-types'
 
-const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses}) => {
+
+    console.log(depenses)
+
     return (
         <>
             <header className="depenses-header">
@@ -36,7 +39,8 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
 
 Depenses.propTypes = {
     setIsAddDepenseOpen: PropTypes.func,
-    setIsEditDepenseOpen: PropTypes.func
+    setIsEditDepenseOpen: PropTypes.func,
+    depenses: PropTypes.array
 }
 
 
