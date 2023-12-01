@@ -8,8 +8,9 @@ import EditDepense from './components/Modals/EditDepense'
 function App() {
 
   //Déclaration des states
-  //Objet Dépense
-  const [depenses, setDepenses] = useState([])
+  //Les dépenses
+  const [depenses, setDepenses] = useState([]);
+  const [filteredDepenses , setFilteredDepenses] = useState([]);
 
   //Gestion des modales
   const [isAddDepenseOpen , setIsAddDepenseOpen] = useState(false);
@@ -17,21 +18,25 @@ function App() {
 
   return (
     <main>
-      <Budget />
+      <Budget 
+        depenses = {depenses}
+        setFilteredDepenses = {setFilteredDepenses}
+      />
       <Depenses 
-      setIsAddDepenseOpen = {setIsAddDepenseOpen} 
-      setIsEditDepenseOpen = {setIsEditDepenseOpen}
-      depenses = {depenses} 
+        setIsAddDepenseOpen = {setIsAddDepenseOpen} 
+        setIsEditDepenseOpen = {setIsEditDepenseOpen}
+        depenses = {depenses}
+        filteredDepenses = {filteredDepenses} 
       />
       <AddDepense 
-      isAddDepenseOpen = {isAddDepenseOpen} 
-      setIsAddDepenseOpen = {setIsAddDepenseOpen}
-      depenses = {depenses}
-      setDepenses = {setDepenses} 
+        isAddDepenseOpen = {isAddDepenseOpen} 
+        setIsAddDepenseOpen = {setIsAddDepenseOpen}
+        depenses = {depenses}
+        setDepenses = {setDepenses} 
       />
       <EditDepense 
-      isEditDepenseOpen = {isEditDepenseOpen} 
-      setIsEditDepenseOpen = {setIsEditDepenseOpen} 
+        isEditDepenseOpen = {isEditDepenseOpen} 
+        setIsEditDepenseOpen = {setIsEditDepenseOpen} 
       />
     </main>
   )

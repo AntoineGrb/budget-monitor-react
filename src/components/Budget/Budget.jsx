@@ -1,6 +1,29 @@
 import './Budget.scss'
+import PropTypes from 'prop-types'
+import { useState , useEffect } from 'react'
+import {months , years } from '../../data/time-units'
 
-const Budget = () => {
+const Budget = ({depenses , setFilteredDepenses}) => {
+
+    //Déclaration des states locaux 
+    const [month , setMonth] = useState('janvier');
+    const [year , setYear] = useState('2023');
+    const [salary , setSalary] = useState(2300);
+
+    useEffect(() => {
+        const filterOnDepenses = () => {
+
+            //Formater la date choisie
+            const formattedDate = `${year}-${month}`
+    
+            //Filtrer sur les dates sélectionnées
+            const depensesToDisplay = depenses.filter(depense => depense.date.substring(0,7) === formattedDate);
+            setFilteredDepenses([...depensesToDisplay])
+        }
+        filterOnDepenses()
+
+    },[year, month, depenses, setFilteredDepenses])
+
     return (
         <>
             <header className="budget-header">
@@ -9,17 +32,21 @@ const Budget = () => {
             <section className="budget-panel">
                 <div className="inputs">
                     <div className="inputs__date select is-rounded">
-                        <select name="month" id="month">
-                            <option value="Mois"> Mois à boucler </option>
+                        <select value={month} onChange={e => setMonth(e.target.value)} name="month" id="month">
+                            {months.map((month , index) => (
+                                <option key={index} value={month.number}> {month.name} </option>
+                            ))}
+                            
                         </select>
-                        <select name="year" id="year">
-                            <option value="2023"> 2023 </option>
-                            <option value="2024"> 2024 </option>
+                        <select value={year} onChange={e => setYear(e.target.value)} name="year" id="year">
+                            {years.map((year , index) => (
+                                <option key={index} value={year}> {year} </option>
+                            ))}
                         </select>
                     </div>
                     <div className="inputs__incomes">
                         <label> Salaire (€) </label>
-                        <input className="input" type="text" name="salary" id="salary" value="2300" />
+                        <input value={salary} onChange={e => setSalary(e.target.value)} className="input" type="number" name="salary" id="salary"/>
                         <label> Autres revenus (€) </label>
                         <input className="input" type="text" name="other-incomes" id="other-incomes" value="0"/> 
                 </div>
@@ -32,6 +59,11 @@ const Budget = () => {
             </section>
         </>
     )
+}
+
+Budget.propTypes = {
+    depenses: PropTypes.array,
+    setFilteredDepenses: PropTypes.func
 }
 
 export default Budget
