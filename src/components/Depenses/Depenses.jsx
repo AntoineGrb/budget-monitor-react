@@ -29,18 +29,21 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
                         <div className="header amount">Montant</div>
                     </div>
 
-                    {filteredDepenses.map((depense , index) => (
-                        <div key={index} className="board__row">
-                            <div className="cell actions">
-                                <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
-                                <i className="fa-regular fa-trash-can"></i>
+                    {filteredDepenses.length > 1 ? 
+                        filteredDepenses.map((depense , index) => (
+                            <div key={index} className="board__row">
+                                <div className="cell actions">
+                                    <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
+                                    <i className="fa-regular fa-trash-can"></i>
+                                </div>
+                                <div className="cell date">{depense.date}</div>
+                                <div className="cell libelle">{depense.libelle}</div>
+                                <div className="cell etiquette"><div className={`tag ${displayTagColor(depense.tag)}`}> {depense.tag} </div></div>
+                                <div className="cell amount">{depense.amount}€</div>
                             </div>
-                            <div className="cell date">{depense.date}</div>
-                            <div className="cell libelle">{depense.libelle}</div>
-                            <div className="cell etiquette"><div className={`tag ${displayTagColor(depense.tag)}`}> {depense.tag} </div></div>
-                            <div className="cell amount">{depense.amount}€</div>
-                        </div>
-                    ))}
+                        ))
+                        : <p className='board_row empty'> Pas de dépenses ce mois ci ! </p>
+                    }
 
                     
                 </div>

@@ -22,6 +22,7 @@ function App() {
     <main>
       <Budget 
         depenses = {depenses}
+        filteredDepenses = {filteredDepenses}
         setFilteredDepenses = {setFilteredDepenses}
       />
       <Depenses 
