@@ -29,7 +29,7 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
                         <div className="header amount">Montant</div>
                     </div>
 
-                    {filteredDepenses.length > 1 ? 
+                    {filteredDepenses.length > 0 ? 
                         filteredDepenses.map((depense , index) => (
                             <div key={index} className="board__row">
                                 <div className="cell actions">

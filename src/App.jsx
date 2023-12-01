@@ -4,8 +4,9 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Budget from './components/Budget/Budget'
 import Depenses from './components/Depenses/Depenses'
-import AddDepense from './components/Modals/AddDepense'
-import EditDepense from './components/Modals/EditDepense'
+import Modal from './components/Modals/Modal'
+import AddForm from './components/Forms/AddForm';
+import EditForm from './components/Forms/EditForm';
 
 function App() {
 
@@ -30,28 +31,15 @@ function App() {
         setIsEditDepenseOpen = {setIsEditDepenseOpen}
         filteredDepenses = {filteredDepenses} 
       />
-      <AddDepense 
-        isAddDepenseOpen = {isAddDepenseOpen} 
-        setIsAddDepenseOpen = {setIsAddDepenseOpen}
-        depenses = {depenses}
-        setDepenses = {setDepenses} 
-      />
-      <EditDepense 
-        isEditDepenseOpen = {isEditDepenseOpen} 
-        setIsEditDepenseOpen = {setIsEditDepenseOpen} 
-      />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+
+      <Modal isOpen = {isAddDepenseOpen}> 
+          <AddForm setIsAddDepenseOpen={setIsAddDepenseOpen} depenses={depenses} setDepenses={setDepenses} />
+      </Modal>
+      <Modal isOpen = {isEditDepenseOpen}>
+        <EditForm setIsEditDepenseOpen={setIsEditDepenseOpen} depenses={depenses} setDepenses={setDepenses} />
+      </Modal>
+
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
     </main>
   )
 }
