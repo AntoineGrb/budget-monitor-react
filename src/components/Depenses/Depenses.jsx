@@ -2,17 +2,18 @@ import './Depenses.scss'
 import PropTypes from 'prop-types'
 import {tags} from '../../data/tags'
 
-const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDepenses, filteredDepenses, setFilteredDepenses}) => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDepenses, filteredDepenses, setEditedDepenseId}) => {
 
-    //Modifier une ligne de dépense
-
+    //Ouvrir la modale contenant EditForm avec la bonne dépense
+    const openEditForm = (depenseId) => {
+        setIsEditDepenseOpen(true);
+        setEditedDepenseId(parseInt(depenseId))
+    }
 
     //Supprimer une ligne de dépense
     const removeDepense = (depenseId) => {
-        console.log(depenseId);
         const depensesUpdated = depenses.filter(depense => depense.id !== depenseId);
         setDepenses([...depensesUpdated]);
-        setFilteredDepenses([...depensesUpdated]);
     }
 
     //Gestion de la couleur des tags
@@ -44,7 +45,7 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDep
                         filteredDepenses.map((depense) => (
                             <div id={depense.id} key={depense.id} className="board__row">
                                 <div className="cell actions">
-                                    <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
+                                    <i onClick={() => openEditForm(depense.id)} className="fa-regular fa-pen-to-square"></i> 
                                     <i onClick={() => removeDepense(depense.id)} className="fa-regular fa-trash-can"></i>
                                 </div>
                                 <div className="cell date">{depense.date}</div>
@@ -69,7 +70,7 @@ Depenses.propTypes = {
     depenses: PropTypes.array,
     setDepenses: PropTypes.func,
     filteredDepenses: PropTypes.array,
-    setFilteredDepenses: PropTypes.func
+    setEditedDepenseId: PropTypes.func
 }
 
 

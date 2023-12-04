@@ -5,9 +5,10 @@ import { toast } from 'react-toastify'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
-const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses}) => {
+const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses, editedDepenseId}) => {
 
     //Déclaration des states des inputs du formulaire
+    const [depenseDate, setDepenseDate] = useState('2023-12-01')
     const [depenseLibelle , setDepenseLibelle] = useState('');
     const [depenseTag , setDepenseTag] = useState('Autres');
     const [depenseAmount , setDepenseAmount] = useState(1);
@@ -15,12 +16,17 @@ const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses}) => {
     const submitForm = (e) => {
         e.preventDefault();
 
-        //Modifier la  dépense 
-        console.lot(depenses)
+        const editedDepense = {
+            id:editedDepenseId,
+            date:depenseDate,
+            libelle:depenseLibelle,
+            tag:depenseTag,
+            amount:parseInt(depenseAmount)
+        }
 
-        //Générer un nouveau tableau à jour
-        console.log(setDepenses)
-
+        //Mettre à jour le tableau dépenses 
+        const depensesUpdated = depenses.map(depense => depense.id === editedDepense.id ? editedDepense : depense) //On récupère la dépense à éditer via le state editedDepenseId
+        setDepenses([...depensesUpdated]);
 
         //Toast succes de la demande
         const notify = () => toast.success("Dépense modifiée !" , {
@@ -54,6 +60,8 @@ const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses}) => {
                 <button onClick={closeModal} className="delete"></button>
             </header>
             <section className="modal-card-body">
+                <label> Modifier la date : </label>
+                <input value={depenseDate} onChange={(e) => setDepenseDate(e.target.value)} className="input" type="date" name="date" id="date" required />
                 <label> Modifier le libellé : </label>
                 <input value={depenseLibelle} onChange={(e) => setDepenseLibelle(e.target.value)} className="input" type="text" name="libelle" id="libelle" required />
                 <label> Modifier le tag : </label>
@@ -77,6 +85,7 @@ EditForm.propTypes = {
     setIsEditDepenseOpen: PropTypes.func,
     setDepenses: PropTypes.func,
     depenses : PropTypes.array,
+    editedDepenseId: PropTypes.number
 }
 
 export default EditForm

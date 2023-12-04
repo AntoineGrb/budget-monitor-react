@@ -14,6 +14,7 @@ function App() {
   //Les dépenses
   const [depenses, setDepenses] = useState([]);
   const [filteredDepenses , setFilteredDepenses] = useState([]);
+  const [editedDepenseId, setEditedDepenseId] = useState(1); //ID de la dépense à éditer, à passer dans la modale contenant EditForm
 
   //Gestion des modales
   const [isAddDepenseOpen , setIsAddDepenseOpen] = useState(false);
@@ -31,15 +32,24 @@ function App() {
         setIsEditDepenseOpen = {setIsEditDepenseOpen}
         depenses = {depenses}
         setDepenses = {setDepenses}
-        filteredDepenses = {filteredDepenses} 
-        setFilteredDepenses = {setFilteredDepenses}
+        filteredDepenses = {filteredDepenses}
+        setEditedDepenseId = {setEditedDepenseId}
       />
 
       <Modal isOpen = {isAddDepenseOpen}> 
-          <AddForm setIsAddDepenseOpen={setIsAddDepenseOpen} depenses={depenses} setDepenses={setDepenses} />
+          <AddForm 
+            setIsAddDepenseOpen={setIsAddDepenseOpen} 
+            depenses={depenses} 
+            setDepenses={setDepenses} 
+          />
       </Modal>
       <Modal isOpen = {isEditDepenseOpen}>
-        <EditForm setIsEditDepenseOpen={setIsEditDepenseOpen} depenses={depenses} setDepenses={setDepenses} />
+        <EditForm 
+          setIsEditDepenseOpen={setIsEditDepenseOpen} 
+          depenses={depenses} 
+          setDepenses={setDepenses} 
+          editedDepenseId = {editedDepenseId}
+        />
       </Modal>
 
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
