@@ -4,14 +4,13 @@ import {tags} from '../../data/tags'
 
 const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses}) => {
 
+    //Gestion de la couleur des tags
     const displayTagColor = (tagName) => {
-        console.log(tagName)
         const tag = tags.find(tag => tag.name === tagName);
-        console.log(tag)
         return tag.color
     }
 
-    console.log(filteredDepenses)
+    console.log('filtered depenses : ' , filteredDepenses)
 
     return (
         <>

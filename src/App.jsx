@@ -10,7 +10,7 @@ import EditForm from './components/Forms/EditForm';
 
 function App() {
 
-  //Déclaration des states
+  //Déclaration des states de l'application
   //Les dépenses
   const [depenses, setDepenses] = useState([]);
   const [filteredDepenses , setFilteredDepenses] = useState([]);

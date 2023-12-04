@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {tags} from '../../data/tags'
 import { toast } from 'react-toastify'
 import SubmitButton from '../Buttons/SubmitButton'
@@ -8,16 +8,36 @@ import CancelButton from '../Buttons/CancelButton'
 const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
 
     //Déclaration des states des inputs du formulaire
+    const [depenseId, setDepenseId] = useState(1);
     const [depenseDate , setDepenseDate] = useState('2023-12-01'); 
     const [depenseLibelle , setDepenseLibelle] = useState('');
     const [depenseTag , setDepenseTag] = useState('Autres');
     const [depenseAmount , setDepenseAmount] = useState(1);
 
+    useEffect(() => {
+
+        //Gestion de l'ID des nouvelles dépenses ajoutées
+        const handleCurrentId = () => {
+            if (depenses.length === 0) {
+                return //Si pas de dépense, l'ID sera la valeur par défaut du state depenseId
+            } else {
+                const depensesIds = depenses.map(depense => depense.id);
+                const currentMaxId = Math.max(...depensesIds) + 1; //On prend l'ID max du tableau et on lui rajoute 1
+                setDepenseId(currentMaxId);
+            }
+        }
+
+        handleCurrentId()
+
+    },[depenses])
+
+    //Gestion de la soummission du formulaire
     const submitForm = (e) => {
         e.preventDefault();
 
         //Enregistrer la nouvelle dépense
         const newDepense = {
+            id:depenseId,
             date:depenseDate,
             libelle:depenseLibelle,
             tag:depenseTag,
@@ -25,7 +45,7 @@ const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
         }
 
         //L'ajouter au tableau
-        setDepenses([...depenses , newDepense]) //! A PASSER EN PROP AU FORM
+        setDepenses([...depenses , newDepense]);
 
         //Toast succes de la demande
         const notify = () => toast.success("Dépense ajoutée !" , {
@@ -41,12 +61,13 @@ const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
         notify()
 
         //Rénitialiser et fermer le formulaire
-        closeModal() //! A PASSER EN PROP AU BOUTON CLOSE
+        closeModal()
     }
 
+    //Fermeture de la modale après soumission
     const closeModal = () => {
         //Rénitialiser et fermer le formulaire
-        setDepenseDate('2023-12-01');
+        setDepenseDate('2023-12-01'); //! Calcul et mettre la date du jour
         setDepenseLibelle('');
         setDepenseTag('Autres');
         setDepenseAmount(1);

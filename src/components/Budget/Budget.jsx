@@ -13,9 +13,13 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
         return {currentMonth , currentYear}
     }
 
+    useEffect(() => {
+        getTodayDate() //On récupère la date du jour au lancement de l'app
+    }, [])
+
     //Déclaration des states locaux 
     const [month , setMonth] = useState(getTodayDate().currentMonth); //Date du jour par défaut
-    const [year , setYear] = useState(getTodayDate().currentYear);
+    const [year , setYear] = useState(getTodayDate().currentYear); //Date du jour par défaut
     const [salary , setSalary] = useState(2300);
     const [otherIncomes, setOtherIncomes] = useState(0);
 
@@ -63,10 +67,6 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
         const monthToDisplay = months[parseInt(month) - 1] //month est le state du mois sélectionné format '01' et le mois JS commence à partir de 0
         return monthToDisplay.name
     }
-
-    useEffect(() => {
-        getTodayDate()
-    }, [])
 
     
     return (
