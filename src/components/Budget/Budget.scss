@@ -59,6 +59,11 @@
         .current-budget {
             margin-bottom: 10px;
             font-size: 1.2rem;
+
+            &__depenses {
+                font-size: 1.4rem;
+                font-weight: 500;
+            }
         }
     }
 }
