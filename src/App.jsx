@@ -29,7 +29,10 @@ function App() {
       <Depenses 
         setIsAddDepenseOpen = {setIsAddDepenseOpen} 
         setIsEditDepenseOpen = {setIsEditDepenseOpen}
+        depenses = {depenses}
+        setDepenses = {setDepenses}
         filteredDepenses = {filteredDepenses} 
+        setFilteredDepenses = {setFilteredDepenses}
       />
 
       <Modal isOpen = {isAddDepenseOpen}> 

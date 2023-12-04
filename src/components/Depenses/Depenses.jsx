@@ -2,13 +2,18 @@ import './Depenses.scss'
 import PropTypes from 'prop-types'
 import {tags} from '../../data/tags'
 
-const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses}) => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDepenses, filteredDepenses, setFilteredDepenses}) => {
 
     //Modifier une ligne de dépense
 
 
     //Supprimer une ligne de dépense
-    
+    const removeDepense = (depenseId) => {
+        console.log(depenseId);
+        const depensesUpdated = depenses.filter(depense => depense.id !== depenseId);
+        setDepenses([...depensesUpdated]);
+        setFilteredDepenses([...depensesUpdated]);
+    }
 
     //Gestion de la couleur des tags
     const displayTagColor = (tagName) => {
@@ -16,6 +21,7 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
         return tag.color
     }
 
+    console.log('depenses : ' , depenses)
     console.log('filtered depenses : ' , filteredDepenses)
 
     return (
@@ -39,7 +45,7 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
                             <div id={depense.id} key={depense.id} className="board__row">
                                 <div className="cell actions">
                                     <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
-                                    <i className="fa-regular fa-trash-can"></i>
+                                    <i onClick={() => removeDepense(depense.id)} className="fa-regular fa-trash-can"></i>
                                 </div>
                                 <div className="cell date">{depense.date}</div>
                                 <div className="cell libelle">{depense.libelle}</div>
@@ -60,7 +66,10 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
 Depenses.propTypes = {
     setIsAddDepenseOpen: PropTypes.func,
     setIsEditDepenseOpen: PropTypes.func,
-    filteredDepenses: PropTypes.array
+    depenses: PropTypes.array,
+    setDepenses: PropTypes.func,
+    filteredDepenses: PropTypes.array,
+    setFilteredDepenses: PropTypes.func
 }
 
 
