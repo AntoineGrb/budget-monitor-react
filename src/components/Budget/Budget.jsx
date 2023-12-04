@@ -83,7 +83,6 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
                             {months.map((month , index) => (
                                 <option key={index} value={month.number}> {month.name} </option>
                             ))}
-                            
                         </select>
                         <select value={year} onChange={e => setYear(e.target.value)} name="year" id="year">
                             {years.map((year , index) => (
@@ -96,9 +95,8 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
                         <input value={salary} onChange={e => setSalary(parseInt(e.target.value))} className="input" type="number" name="salary" id="salary" min="0"/>
                         <label> Autres revenus (€) </label>
                         <input value={otherIncomes} onChange={e => setOtherIncomes(parseInt(e.target.value))} className="input" type="number" name="other-incomes" id="other-incomes" min="0"/> 
+                    </div>
                 </div>
-                </div>
-
                 <div className="display">
                     <h2 className="current-month"> Suivi budget de :  <span>{displayMonthInLetter()}</span> <span>{year}</span> </h2>
                     <p className="current-budget"> 

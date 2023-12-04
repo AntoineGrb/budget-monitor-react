@@ -4,6 +4,12 @@ import {tags} from '../../data/tags'
 
 const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses}) => {
 
+    //Modifier une ligne de dépense
+
+
+    //Supprimer une ligne de dépense
+    
+
     //Gestion de la couleur des tags
     const displayTagColor = (tagName) => {
         const tag = tags.find(tag => tag.name === tagName);
@@ -29,8 +35,8 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , filteredDepenses
                     </div>
 
                     {filteredDepenses.length > 0 ? 
-                        filteredDepenses.map((depense , index) => (
-                            <div key={index} className="board__row">
+                        filteredDepenses.map((depense) => (
+                            <div id={depense.id} key={depense.id} className="board__row">
                                 <div className="cell actions">
                                     <i onClick={() => setIsEditDepenseOpen(true)} className="fa-regular fa-pen-to-square"></i> 
                                     <i className="fa-regular fa-trash-can"></i>
