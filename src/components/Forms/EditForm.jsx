@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import {tags} from '../../data/tags'
 import { toast } from 'react-toastify'
 import SubmitButton from '../Buttons/SubmitButton'
@@ -13,6 +13,26 @@ const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses, editedDepenseId
     const [depenseTag , setDepenseTag] = useState('Autres');
     const [depenseAmount , setDepenseAmount] = useState(1);
 
+    useEffect(() => {
+        //Récupérer les infos de la dépense à éditer
+        if (depenses.length === 0) {
+            return
+        }
+        const getDepenseInfo = () => {
+        const depenseToUpdate = depenses.find(depense => depense.id === editedDepenseId);
+
+        setDepenseDate(depenseToUpdate.date);
+        setDepenseLibelle(depenseToUpdate.libelle);
+        setDepenseTag(depenseToUpdate.tag);
+        setDepenseAmount(depenseToUpdate.amount);
+        }
+
+        getDepenseInfo()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[editedDepenseId])
+
+    //Gestion de la soummission du formulaire
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -45,11 +65,8 @@ const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses, editedDepenseId
         closeModal()
     }
 
+    //Fermeture de la modale après soumission
     const closeModal = () => {
-        //Rénitialiser et fermer le formulaire
-        setDepenseLibelle('');
-        setDepenseTag('Autres');
-        setDepenseAmount(1);
         setIsEditDepenseOpen(false);
     }
 
@@ -57,7 +74,7 @@ const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses, editedDepenseId
         <form onSubmit={(e) => submitForm(e)}>
             <header className="modal-card-head">
                 <p className="modal-card-title"> Editer la dépense </p>
-                <button onClick={closeModal} className="delete"></button>
+                <button onClick={closeModal} type='button' className="delete"></button>
             </header>
             <section className="modal-card-body">
                 <label> Modifier la date : </label>
