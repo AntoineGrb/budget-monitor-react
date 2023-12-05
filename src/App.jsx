@@ -1,5 +1,5 @@
 import './App.scss'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Budget from './components/Budget/Budget'
@@ -10,15 +10,23 @@ import EditForm from './components/Forms/EditForm';
 
 function App() {
 
-  //Déclaration des states de l'application
+  //!LES STATES DE L'APPLICATION ==> A PASSER EN CONTEXTE
   //Les dépenses
-  const [depenses, setDepenses] = useState([]);
+  const [depenses, setDepenses] = useState(() => { //L'état par défaut de dépenses est recupéré dans le local storage, sinon c'est un tableau vide.
+    const savedDepenses = localStorage.getItem('depenses');
+    return savedDepenses ? JSON.parse(savedDepenses) : [];
+  });
   const [filteredDepenses , setFilteredDepenses] = useState([]);
   const [editedDepenseId, setEditedDepenseId] = useState(1); //ID de la dépense à éditer, à passer dans la modale contenant EditForm
 
   //Gestion des modales
   const [isAddDepenseOpen , setIsAddDepenseOpen] = useState(false);
   const [isEditDepenseOpen , setIsEditDepenseOpen] = useState(false);
+
+  //Sauvegarde dans le local storage
+  useEffect(() => {
+    localStorage.setItem('depenses', JSON.stringify(depenses));
+  }, [depenses])
 
   return (
     <main>

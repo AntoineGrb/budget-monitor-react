@@ -22,9 +22,6 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDep
         return tag.color
     }
 
-    console.log('depenses : ' , depenses)
-    console.log('filtered depenses : ' , filteredDepenses)
-
     return (
         <>
             <header className="depenses-header">
