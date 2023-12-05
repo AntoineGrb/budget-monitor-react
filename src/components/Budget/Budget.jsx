@@ -77,8 +77,8 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
 
             <section className="budget-panel">
                 <div className="inputs">
+                    <h2 className='inputs__title'> Sélectionner la période </h2>
                     <div className="inputs__date select is-rounded">
-                        <label> Sélectionner le mois </label>
                         <select value={month} onChange={e => setMonth(e.target.value)} name="month" id="month">
                             {months.map((month , index) => (
                                 <option key={index} value={month.number}> {month.name} </option>
@@ -90,11 +90,15 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
                             ))}
                         </select>
                     </div>
+                    <h2 className='inputs__title'> 
+                        Les revenus du mois 
+                        <i className="fa-regular fa-pen-to-square" title='Editer les revenus mensuels'></i>  
+                    </h2>
                     <div className="inputs__incomes">
                         <label> Salaire (€) </label>
-                        <input value={salary} onChange={e => setSalary(parseInt(e.target.value))} className="input" type="number" name="salary" id="salary" min="0"/>
+                        <span className='input salary'> 2300 €</span>
                         <label> Autres revenus (€) </label>
-                        <input value={otherIncomes} onChange={e => setOtherIncomes(parseInt(e.target.value))} className="input" type="number" name="other-incomes" id="other-incomes" min="0"/> 
+                        <span className='input salary'> 0 €</span>
                     </div>
                 </div>
                 <div className="display">
