@@ -110,7 +110,7 @@ const Budget = ({setIsEditSalaryOpen}) => {
                     <h2 className="current-month"> Suivi budget de :  <span>{displayMonthInLetter()}</span> <span>{year}</span> </h2>
                     <p className="current-budget"> 
                         <span className='current-budget__depenses'> {filteredDepenses ? calculateFilteredAmount() : 0}€</span> / 
-                        <span className='current-budget__salary'> {getMonthIncomes().salary}€</span> 
+                        <span className='current-budget__salary'> {getMonthIncomes().salary + getMonthIncomes().otherIncomes}€</span> 
                     </p>
                     <progress className={`progress is-large ${handleProgressBarColor()}`} value={calculateFilteredAmount()} max={getMonthIncomes().salary + getMonthIncomes().otherIncomes}></progress>
                 </div>

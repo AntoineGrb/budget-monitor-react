@@ -19,13 +19,19 @@ export const IncomesProvider = ({children}) => {
 
     //STATES DU CONTEXTE DEPENSES
     //Les incomes (tableau qui contiendra des objets avec les revenus enregistrés pour un couple mois/année)
-    const [incomes, setIncomes] = useState([{month:'11' , year:'2023', salary:4600, otherIncomes:1000 }])
+    const [incomes, setIncomes] = useState(() => { //L'état par défaut de incomes est recupéré dans le local storage, sinon c'est un tableau vide.
+        const savedIncomes = localStorage.getItem('incomes');
+        return savedIncomes ? JSON.parse(savedIncomes) : [];
+        })
 
     //Le mois et l'année sélectionnés
     const [month , setMonth] = useState(getTodayDate().currentMonth); //Date du jour par défaut
     const [year , setYear] = useState(getTodayDate().currentYear); //Date du jour par défaut
 
-    //!Sauvegarde dans le local storage à chaque modif du tableau incomes
+    //Sauvegarde dans le local storage à chaque modif du tableau incomes
+    useEffect(() => {
+        localStorage.setItem('incomes', JSON.stringify(incomes));
+    }, [incomes])
 
 
     return (
