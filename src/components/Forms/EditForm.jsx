@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useState , useEffect, useContext } from 'react'
 import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
-import { toast } from 'react-toastify'
+import { notifySuccess } from '../../utils/toastNotifications'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
@@ -54,20 +54,7 @@ const EditForm = ({setIsEditDepenseOpen}) => {
         const depensesUpdated = depenses.map(depense => depense.id === editedDepense.id ? editedDepense : depense) //On récupère la dépense à éditer via le state editedDepenseId
         setDepenses([...depensesUpdated]);
 
-        //Toast succes de la demande
-        const notify = () => toast.success("Dépense modifiée !" , {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-        });
-        notify()
-
-        //Rénitialiser et fermer le formulaire
+        notifySuccess('Dépense modifiée !');
         closeModal()
     }
 

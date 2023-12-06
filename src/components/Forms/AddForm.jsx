@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useState , useContext } from 'react'
 import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
-import { toast } from 'react-toastify'
+import { notifySuccess } from '../../utils/toastNotifications'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
@@ -50,21 +50,8 @@ const AddForm = ({setIsAddDepenseOpen}) => {
 
         //L'ajouter au tableau
         setDepenses([...depenses , newDepense]);
-
-        //Toast succes de la demande
-        const notify = () => toast.success("Dépense ajoutée !" , {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-        });
-        notify()
-
-        //Rénitialiser et fermer le formulaire
+        
+        notifySuccess('Dépense ajoutée !');
         closeModal()
     }
 

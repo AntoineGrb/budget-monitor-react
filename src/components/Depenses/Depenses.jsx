@@ -2,6 +2,7 @@ import './Depenses.scss'
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import { DepensesContext } from '../../context/DepensesContext'
+import { notifyInfo } from '../../utils/toastNotifications'
 import {tags} from '../../data/tags'
 
 const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
@@ -19,6 +20,8 @@ const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
     const removeDepense = (depenseId) => {
         const depensesUpdated = depenses.filter(depense => depense.id !== depenseId);
         setDepenses([...depensesUpdated]);
+        notifyInfo('Dépense supprimée !')
+
     }
 
     //Gestion de la couleur des tags

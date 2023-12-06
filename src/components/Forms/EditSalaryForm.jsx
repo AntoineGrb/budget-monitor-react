@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState , useContext } from 'react'
-import { toast } from 'react-toastify'
+import { notifySuccess } from '../../utils/toastNotifications'
 import { IncomesContext } from '../../context/IncomesContext'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
@@ -39,18 +39,7 @@ const EditSalaryForm = ({setIsEditSalaryOpen}) => {
         }   
         setIncomes(incomesUpdated)
         
-        //Toast succes de la demande
-        const notify = () => toast.success("Revenus mensuels modifiés !" , {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-        });
-        notify()
+        notifySuccess('Revenus mensuels mis à jour !');
         closeModal()
     }
 
