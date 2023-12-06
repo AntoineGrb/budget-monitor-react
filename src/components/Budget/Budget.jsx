@@ -120,7 +120,7 @@ const Budget = ({setIsEditSalaryOpen}) => {
 }
 
 Budget.propTypes = {
-    setIsEditSalaryOpen: PropTypes.bool,
+    setIsEditSalaryOpen: PropTypes.func,
     depenses: PropTypes.array,
     filteredDepenses: PropTypes.array,
     setFilteredDepenses: PropTypes.func
