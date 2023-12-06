@@ -1,9 +1,16 @@
 import './Budget.scss'
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { DepensesContext } from '../../context/DepensesContext'
 import { useState , useEffect } from 'react'
 import {months , years } from '../../data/time-units'
+import { IncomesContext } from '../../context/IncomesContext'
 
-const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
+const Budget = () => {
+
+    //Récupération des states du context
+    const {incomes} = useContext(IncomesContext)
+    const {depenses, filteredDepenses, setFilteredDepenses} = useContext(DepensesContext)
 
     //Obtenir la date du jour pour les valeurs par défaut
     const getTodayDate = () => {
@@ -20,11 +27,9 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
     //Déclaration des states locaux 
     const [month , setMonth] = useState(getTodayDate().currentMonth); //Date du jour par défaut
     const [year , setYear] = useState(getTodayDate().currentYear); //Date du jour par défaut
-    const [salary , setSalary] = useState(2300);
-    const [otherIncomes, setOtherIncomes] = useState(0);
 
-    //Déclenchement du filtrage des données
     useEffect(() => {
+        //Déclenchement du filtrage des données
         const filterOnDepenses = () => {
 
             //Formater la date choisie
@@ -36,9 +41,24 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
         }
         filterOnDepenses()
 
-    },[year, month, depenses, setFilteredDepenses]) //Les données sont mises à jour à chaque changement de mois/année et d'ajout de dépense
+    },[year, month, depenses, setFilteredDepenses]) //Les données sont mises à jour à chaque changement de mois/année et à chaque nouvelle dépense ajoutée
 
-    //Gérer le calcul de la progress bar des dépenses
+    //Rechercher et afficher les revenus du mois en cours
+    const getMonthIncomes = () => {
+        //Vérifier s'il y a un revenu enregistré poru le mois/année sélectionné
+        const searchedIncome = incomes.find(el => el.month === month && el.year === year);
+
+        if (searchedIncome === undefined) {
+            return {
+                salary:2300,
+                otherIncomes:0
+            }
+        } else {
+            return searchedIncome
+        }
+    }
+    
+    //Calculer le montant total des dépenses filtrées
     const calculateFilteredAmount = () => {
         //Sommer toutes les dépenses filtrées
         let amount = 0;
@@ -51,10 +71,10 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
     //Gérer la couleur de la progress bar des dépenses
     const handleProgressBarColor = () => {
         //Calcul du ratio entre les dépenses du mois et les entrées en argent        
-        if ((calculateFilteredAmount() / (salary + otherIncomes)) < 0.7) {
+        if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.7) {
             return 'is-primary'
         }
-        else if ((calculateFilteredAmount() / (salary + otherIncomes)) < 0.9) {
+        else if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.9) {
             return 'is-warning'
         }
         else {
@@ -96,18 +116,18 @@ const Budget = ({depenses , filteredDepenses, setFilteredDepenses}) => {
                     </h2>
                     <div className="inputs__incomes">
                         <label> Salaire (€) </label>
-                        <span className='input salary'> 2300 €</span>
+                        <span className='input salary'> {getMonthIncomes().salary} €</span>
                         <label> Autres revenus (€) </label>
-                        <span className='input salary'> 0 €</span>
+                        <span className='input salary'> {getMonthIncomes().otherIncomes} €</span>
                     </div>
                 </div>
                 <div className="display">
                     <h2 className="current-month"> Suivi budget de :  <span>{displayMonthInLetter()}</span> <span>{year}</span> </h2>
                     <p className="current-budget"> 
                         <span className='current-budget__depenses'> {filteredDepenses ? calculateFilteredAmount() : 0}€</span> / 
-                        <span className='current-budget__salary'> {salary ? salary + otherIncomes : ''}€</span> 
+                        <span className='current-budget__salary'> {getMonthIncomes().salary}€</span> 
                     </p>
-                    <progress className={`progress is-large ${handleProgressBarColor()}`} value={calculateFilteredAmount()} max={salary + otherIncomes}></progress>
+                    <progress className={`progress is-large ${handleProgressBarColor()}`} value={calculateFilteredAmount()} max={getMonthIncomes().salary + getMonthIncomes().otherIncomes}></progress>
                 </div>
             </section>
         </>

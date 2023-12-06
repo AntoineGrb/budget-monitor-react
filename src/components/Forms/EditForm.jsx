@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
-import { useState , useEffect } from 'react'
+import { useState , useEffect, useContext } from 'react'
+import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
 import { toast } from 'react-toastify'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
-const EditForm = ({setIsEditDepenseOpen , depenses, setDepenses, editedDepenseId}) => {
+const EditForm = ({setIsEditDepenseOpen}) => {
+
+    //Récupération des states du context
+    const {depenses, setDepenses, editedDepenseId} = useContext(DepensesContext)
 
     //Déclaration des states des inputs du formulaire
     const [depenseDate, setDepenseDate] = useState('2023-12-01')

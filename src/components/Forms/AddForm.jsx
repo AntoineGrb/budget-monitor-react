@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useEffect, useState , useContext } from 'react'
+import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
 import { toast } from 'react-toastify'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
-const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
+const AddForm = ({setIsAddDepenseOpen}) => {
+
+    //Récupération des states du context
+    const {depenses, setDepenses} = useContext(DepensesContext)
 
     //Déclaration des states des inputs du formulaire
     const [depenseId, setDepenseId] = useState(1);
@@ -16,8 +20,8 @@ const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
 
     useEffect(() => {
 
-        //Gestion de l'ID des nouvelles dépenses ajoutées
-        const handleCurrentId = () => {
+        //Récupération de l'ID des nouvelles dépenses ajoutées
+        const getCurrentId = () => {
             if (depenses.length === 0) {
                 return //Si pas de dépense, l'ID sera la valeur par défaut du state depenseId
             } else {
@@ -27,7 +31,7 @@ const AddForm = ({setIsAddDepenseOpen , depenses, setDepenses}) => {
             }
         }
 
-        handleCurrentId()
+        getCurrentId()
 
     },[depenses])
 

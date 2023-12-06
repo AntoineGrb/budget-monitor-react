@@ -1,8 +1,13 @@
 import './Depenses.scss'
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
 
-const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen , depenses, setDepenses, filteredDepenses, setEditedDepenseId}) => {
+const Depenses = ({setIsAddDepenseOpen , setIsEditDepenseOpen}) => {
+
+    //Récupérer les states du context
+    const {depenses, setDepenses, filteredDepenses, setEditedDepenseId} = useContext(DepensesContext)
 
     //Ouvrir la modale contenant EditForm avec la bonne dépense
     const openEditForm = (depenseId) => {
