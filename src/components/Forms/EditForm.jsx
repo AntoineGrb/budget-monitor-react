@@ -21,11 +21,12 @@ const EditForm = ({setIsEditDepenseOpen}) => {
         //Récupérer les infos de la dépense à éditer
         const getDepenseInfos = () => {
 
-            if (depenses.length === 0) {
+            const depenseToUpdate = depenses.find(depense => depense.id === editedDepenseId);
+
+            if (depenseToUpdate === undefined) {
                 return
             }
-
-            const depenseToUpdate = depenses.find(depense => depense.id === editedDepenseId);
+            console.log(depenses)
             setDepenseDate(depenseToUpdate.date);
             setDepenseLibelle(depenseToUpdate.libelle);
             setDepenseTag(depenseToUpdate.tag);
