@@ -19,19 +19,20 @@ const EditForm = ({setIsEditDepenseOpen}) => {
 
     useEffect(() => {
         //Récupérer les infos de la dépense à éditer
-        if (depenses.length === 0) {
-            return
-        }
-        const getDepenseInfo = () => {
-        const depenseToUpdate = depenses.find(depense => depense.id === editedDepenseId);
+        const getDepenseInfos = () => {
 
-        setDepenseDate(depenseToUpdate.date);
-        setDepenseLibelle(depenseToUpdate.libelle);
-        setDepenseTag(depenseToUpdate.tag);
-        setDepenseAmount(depenseToUpdate.amount);
+            if (depenses.length === 0) {
+                return
+            }
+
+            const depenseToUpdate = depenses.find(depense => depense.id === editedDepenseId);
+            setDepenseDate(depenseToUpdate.date);
+            setDepenseLibelle(depenseToUpdate.libelle);
+            setDepenseTag(depenseToUpdate.tag);
+            setDepenseAmount(depenseToUpdate.amount);
         }
 
-        getDepenseInfo()
+        getDepenseInfos()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[editedDepenseId])

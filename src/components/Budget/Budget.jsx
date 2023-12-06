@@ -2,31 +2,16 @@ import './Budget.scss'
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import { DepensesContext } from '../../context/DepensesContext'
-import { useState , useEffect } from 'react'
-import {months , years } from '../../data/time-units'
 import { IncomesContext } from '../../context/IncomesContext'
+import { useEffect } from 'react'
+import {months , years } from '../../data/time-units'
 
-const Budget = () => {
+
+const Budget = ({setIsEditSalaryOpen}) => {
 
     //Récupération des states du context
-    const {incomes} = useContext(IncomesContext)
+    const {incomes, month, setMonth, year, setYear} = useContext(IncomesContext)
     const {depenses, filteredDepenses, setFilteredDepenses} = useContext(DepensesContext)
-
-    //Obtenir la date du jour pour les valeurs par défaut
-    const getTodayDate = () => {
-        const today = new Date;
-        const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
-        const currentYear = today.getFullYear().toString();
-        return {currentMonth , currentYear}
-    }
-
-    useEffect(() => {
-        getTodayDate() //On récupère la date du jour au lancement de l'app
-    }, [])
-
-    //Déclaration des states locaux 
-    const [month , setMonth] = useState(getTodayDate().currentMonth); //Date du jour par défaut
-    const [year , setYear] = useState(getTodayDate().currentYear); //Date du jour par défaut
 
     useEffect(() => {
         //Déclenchement du filtrage des données
@@ -112,7 +97,7 @@ const Budget = () => {
                     </div>
                     <h2 className='inputs__title'> 
                         Les revenus du mois 
-                        <i className="fa-regular fa-pen-to-square" title='Editer les revenus mensuels'></i>  
+                        <i onClick={() => setIsEditSalaryOpen(true)} className="fa-regular fa-pen-to-square" title='Editer les revenus mensuels'></i>  
                     </h2>
                     <div className="inputs__incomes">
                         <label> Salaire (€) </label>
@@ -135,6 +120,7 @@ const Budget = () => {
 }
 
 Budget.propTypes = {
+    setIsEditSalaryOpen: PropTypes.bool,
     depenses: PropTypes.array,
     filteredDepenses: PropTypes.array,
     setFilteredDepenses: PropTypes.func

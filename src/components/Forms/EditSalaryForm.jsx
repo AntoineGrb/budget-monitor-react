@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState , useContext } from 'react'
 import { toast } from 'react-toastify'
+import { IncomesContext } from '../../context/IncomesContext'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
-const EditSalaryForm = ({month, year, setIsEditSalaryDepenseOpen, incomes, setIncomes}) => {
+const EditSalaryForm = ({setIsEditSalaryOpen}) => {
+
+    const {incomes, setIncomes, month, year} = useContext(IncomesContext)
 
     //Déclaration des states locaux des inputs
     const [salary, setSalary] = useState(2300);
@@ -18,14 +21,24 @@ const EditSalaryForm = ({month, year, setIsEditSalaryDepenseOpen, incomes, setIn
         const newIncome = {
             month: month,
             year: year,
-            salary:salary,
-            otherIncomes:otherIncomes
+            salary:Number(salary),
+            otherIncomes:Number(otherIncomes)
         }
 
-        //Mettre à jour le tableau dépenses 
-        const incomesUpdated = incomes.map(income => income.month === newIncome.month && income.year === newIncome.year ? newIncome : income) //On récupère la dépense à éditer via le state editedDepenseId
-        setIncomes([...incomesUpdated]);
+        //Vérifier si le tableau incomes comporte déjà un objet pour ce couple mois/année
+        const isIncome = incomes.find(income => income.month === newIncome.month && income.year === newIncome.year);
 
+        let incomesUpdated;
+        if (isIncome) {
+            //Mettre à jour l'élément existant
+            incomesUpdated = incomes.map(income => income.month === newIncome.month && income.year === newIncome.year ? newIncome : income);
+
+        } else {
+            //Ajouter l'élément au tableau
+            incomesUpdated = [...incomes, newIncome]
+        }   
+        setIncomes(incomesUpdated)
+        
         //Toast succes de la demande
         const notify = () => toast.success("Revenus mensuels modifiés !" , {
             position: "top-right",
@@ -38,14 +51,15 @@ const EditSalaryForm = ({month, year, setIsEditSalaryDepenseOpen, incomes, setIn
             theme: "light",
         });
         notify()
-
-        //Rénitialiser et fermer le formulaire
         closeModal()
     }
 
     //Fermeture de la modale après soumission
     const closeModal = () => {
-        setIsEditSalaryDepenseOpen(false);
+        //On reset les inputs et on ferme la modale
+        setSalary(2300);
+        setOtherIncomes(0)
+        setIsEditSalaryOpen(false);
     }
 
     return (
@@ -71,7 +85,7 @@ const EditSalaryForm = ({month, year, setIsEditSalaryDepenseOpen, incomes, setIn
 EditSalaryForm.propTypes = {
     month: PropTypes.string,
     year: PropTypes.string,
-    setIsEditSalaryDepenseOpen: PropTypes.func,
+    setIsEditSalaryOpen: PropTypes.func,
     incomes : PropTypes.array,
     setIncomes: PropTypes.func
 }
