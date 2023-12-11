@@ -29,7 +29,7 @@ Le tableau Budget permet de sélectionner le mois souhaité et d'afficher les in
 
 Les informations se mettent dynamiquement à jour à chaque changement. La progress bar passe au jaune puis au rouge à l'approche du maximum pour alerter sur le ratio.
 
-[Image]
+![image](https://github.com/AntoineGrb/budget-monitor-react/assets/119600392/2475e371-77b4-404e-b9bb-11fb285e45f3)
 
 ### Section dépenses
 
@@ -39,7 +39,8 @@ Le tableau des dépenses est affiché en dessous du suivi budgétaire. On y retr
 - Un tag pour caractériser la dépense 
 - Le montant de la dépense
 
-[image]
+![image](https://github.com/AntoineGrb/budget-monitor-react/assets/119600392/d6cb4d73-f4ef-4002-9341-0c28ded683ca)
+
 
 #### Ajouter une dépenses
 On peut ajouter une dépense en cliquant sur le bouton Ajouter une dépense. Une modale s'ouvre avec un formulaire permettant de saisir les informations de la dépense.
@@ -51,8 +52,8 @@ L'édition d'une dépense se fait en cliquant sur l'icone d'édition sur la dép
 La suppresion d'une dépense se fait simplement en cliquant sur la corbeille sur la dépense.
 
 A noter que chaque action utilisateur est confirmée par un toast.
+![image](https://github.com/AntoineGrb/budget-monitor-react/assets/119600392/75c3b390-ced3-4ab1-b970-ad3c8e3f7ae4)
 
-[image]
 
 ## Technologies utilisées 🛠️
 
