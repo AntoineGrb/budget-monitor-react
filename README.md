@@ -52,6 +52,7 @@ L'édition d'une dépense se fait en cliquant sur l'icone d'édition sur la dép
 La suppresion d'une dépense se fait simplement en cliquant sur la corbeille sur la dépense.
 
 A noter que chaque action utilisateur est confirmée par un toast.
+
 ![image](https://github.com/AntoineGrb/budget-monitor-react/assets/119600392/75c3b390-ced3-4ab1-b970-ad3c8e3f7ae4)
 
 
