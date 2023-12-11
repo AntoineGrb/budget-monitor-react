@@ -18,3 +18,21 @@
   h2 {
     font-size: 1.5rem;
   }
+
+  @media screen and (max-width: 1000px) {
+    main {
+      width: 95%;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    p , label, select, option {
+      font-size: 0.8rem;
+    }
+  }

@@ -76,3 +76,36 @@
         text-align: center;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .depenses-panel {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .board__row {
+        padding: 0.5rem;
+
+        .actions {
+            width: 20%;
+
+            i {
+                font-size: 1rem;
+            }
+        }
+        .date {
+            width: 25%;
+        }
+
+        .libelle {
+            width: 45%;
+        }
+
+        .amount {
+            width: 15%;
+        }
+    }
+
+    .small-tag {
+        background-color: red;
+    }
+}

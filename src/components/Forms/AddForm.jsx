@@ -69,7 +69,7 @@ const AddForm = ({setIsAddDepenseOpen}) => {
         <form onSubmit={(e) => submitForm(e)}>
             <header className="modal-card-head">
                 <p className="modal-card-title"> Ajouter une dépense </p>
-                <button onClick={closeModal} className="delete"></button>
+                <button type='button' onClick={closeModal} className="delete"></button>
             </header>
             <section className="modal-card-body">
                 <label> Date de la dépense : </label>

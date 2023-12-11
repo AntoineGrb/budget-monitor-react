@@ -79,3 +79,14 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .budget-panel {
+      flex-direction: column;
+      gap: 50px;
+
+        .inputs, .display {
+            width: 100%;
+        }
+    }
+}
