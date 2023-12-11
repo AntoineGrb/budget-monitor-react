@@ -53,6 +53,10 @@ const Budget = ({setIsEditSalaryOpen}) => {
         return amount
     }
 
+    const calculateRatio = () => {
+        return Math.floor(100* calculateFilteredAmount() / (getMonthIncomes().salary + getMonthIncomes().otherIncomes))
+    }
+
     //Gérer la couleur de la progress bar des dépenses
     const handleProgressBarColor = () => {
         //Calcul du ratio entre les dépenses du mois et les entrées en argent        
@@ -107,11 +111,21 @@ const Budget = ({setIsEditSalaryOpen}) => {
                     </div>
                 </div>
                 <div className="display">
-                    <h2 className="current-month"> Suivi budget de :  <span>{displayMonthInLetter()}</span> <span>{year}</span> </h2>
-                    <p className="current-budget"> 
-                        <span className='current-budget__depenses'> {filteredDepenses ? calculateFilteredAmount() : 0}€</span> / 
-                        <span className='current-budget__salary'> {getMonthIncomes().salary + getMonthIncomes().otherIncomes}€</span> 
-                    </p>
+                    <h2 className="current-month"> <span>{displayMonthInLetter()}</span> <span>{year}</span> </h2>
+                    <div className="current-infos">
+                        <p> Nombre de dépenses : </p>
+                        <span className='current-infos__value'> {filteredDepenses.length} </span>
+                        <p> Total dépensé : </p>
+                        <span className='current-infos__value'> {filteredDepenses ? calculateFilteredAmount() : 0}€</span>
+                        <p> Total disponible : </p>
+                        <span className='current-infos__value'> {getMonthIncomes().salary + getMonthIncomes().otherIncomes}€</span>
+                        <p> Ratio dépensé / disponible : </p>
+                        <span className='current-infos__value'> {filteredDepenses ? calculateRatio() : 100}% </span>
+                    </div>
+                    <div className='progress__values'> 
+                        <p> 0€ </p>
+                        <p>{getMonthIncomes().salary + getMonthIncomes().otherIncomes}€ </p>
+                    </div>
                     <progress className={`progress is-large ${handleProgressBarColor()}`} value={calculateFilteredAmount()} max={getMonthIncomes().salary + getMonthIncomes().otherIncomes}></progress>
                 </div>
             </section>
