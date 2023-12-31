@@ -89,6 +89,20 @@
         .progress__values {
             display: flex;
             justify-content: space-between;
+            margin: 10px 0 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+
+            &-fill {
+                height: 25px;
+                background-color: blue;
+                transition: width .9s ease-in-out;
+            }
         }
     }
 }
@@ -97,6 +111,7 @@
     .budget-panel {
       flex-direction: column;
       gap: 50px;
+      padding: 1rem ;
 
         .inputs, .display {
             width: 100%;

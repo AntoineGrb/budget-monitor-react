@@ -61,13 +61,13 @@ const Budget = ({setIsEditSalaryOpen}) => {
     const handleProgressBarColor = () => {
         //Calcul du ratio entre les dépenses du mois et les entrées en argent        
         if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.7) {
-            return 'is-primary'
+            return 'hsl(171, 100%, 41%)'
         }
         else if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.9) {
-            return 'is-warning'
+            return 'hsl(48, 100%, 67%)'
         }
         else {
-            return 'is-danger'
+            return 'hsl(348, 100%, 61%)'
         }
     }
 
@@ -126,7 +126,10 @@ const Budget = ({setIsEditSalaryOpen}) => {
                         <p> 0€ </p>
                         <p>{getMonthIncomes().salary + getMonthIncomes().otherIncomes}€ </p>
                     </div>
-                    <progress className={`progress is-large ${handleProgressBarColor()}`} value={calculateFilteredAmount()} max={getMonthIncomes().salary + getMonthIncomes().otherIncomes}></progress>
+                    <div className="progress-bar">
+                        <div className="progress-bar-fill" style={{ width: `${calculateRatio()}%` , backgroundColor: handleProgressBarColor() }}></div>
+                    </div>
+
                 </div>
             </section>
         </>
