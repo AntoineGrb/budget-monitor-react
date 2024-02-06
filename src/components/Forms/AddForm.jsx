@@ -3,6 +3,7 @@ import { useEffect, useState , useContext } from 'react'
 import { DepensesContext } from '../../context/DepensesContext'
 import {tags} from '../../data/tags'
 import { notifySuccess } from '../../utils/toastNotifications'
+import { formatTodayDate } from '../../utils/formatDate'
 import SubmitButton from '../Buttons/SubmitButton'
 import CancelButton from '../Buttons/CancelButton'
 
@@ -13,7 +14,7 @@ const AddForm = ({setIsAddDepenseOpen}) => {
 
     //Déclaration des states des inputs du formulaire
     const [depenseId, setDepenseId] = useState(1);
-    const [depenseDate , setDepenseDate] = useState('2023-12-01'); 
+    const [depenseDate , setDepenseDate] = useState(formatTodayDate()); 
     const [depenseLibelle , setDepenseLibelle] = useState('');
     const [depenseTag , setDepenseTag] = useState('Autres');
     const [depenseAmount , setDepenseAmount] = useState(1);
