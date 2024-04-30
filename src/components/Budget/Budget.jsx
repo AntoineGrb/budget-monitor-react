@@ -105,9 +105,9 @@ const Budget = ({setIsEditSalaryOpen}) => {
                     </h2>
                     <div className="inputs__incomes">
                         <label> Salaire (€) </label>
-                        <span className='input salary'> {getMonthIncomes().salary} €</span>
+                        <span className='incomes__salary'> {getMonthIncomes().salary} €</span>
                         <label> Autres revenus (€) </label>
-                        <span className='input salary'> {getMonthIncomes().otherIncomes} €</span>
+                        <span className='incomes__salary'> {getMonthIncomes().otherIncomes} €</span>
                     </div>
                 </div>
                 <div className="display">

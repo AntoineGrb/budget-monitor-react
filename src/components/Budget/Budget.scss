@@ -50,9 +50,12 @@
                 margin-bottom: 0;
             }
 
-            input {
-                width: 100%;
-                margin-bottom: 5px;
+            .incomes__salary {
+                padding: .3rem 0.3rem .5rem;
+                background-color: white;
+                border-radius: 2px;
+                background-color: #F9F9FB;
+                cursor: default;
             }
         }
         
@@ -82,6 +85,8 @@
                 padding: .3rem 0.3rem .5rem;
                 background-color: white;
                 border-radius: 2px;
+                background-color: #F9F9FB;
+                cursor: default;
             }
         }
 
