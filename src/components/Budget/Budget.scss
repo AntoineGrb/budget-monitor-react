@@ -3,7 +3,7 @@
 }
 
 .budget-panel {
-    background-color: lightgray;
+    background-color: #E0E1E6;
     border-radius: 8px;
     display: flex;
     gap: 10%;
@@ -67,7 +67,6 @@
             font-family: Arial, Helvetica, sans-serif;
             margin-bottom: 40px;
             font-weight: 600;
-            text-decoration: underline;
         }
 
         .current-infos {
@@ -94,7 +93,7 @@
 
         .progress-bar {
             width: 100%;
-            background-color: #e0e0e0;
+            background-color: white;
             border-radius: 15px;
             overflow: hidden;
 

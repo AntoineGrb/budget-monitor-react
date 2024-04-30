@@ -12,7 +12,7 @@
 }
 
 .depenses-panel {
-    background-color: lightgray;
+    background-color: #E0E1E6;
     border-radius: 8px;
     display: flex;
     gap: 10%;
@@ -57,6 +57,10 @@
 
         .etiquette {
             width: 20%;
+
+            .tag > p {
+                color:white;
+            }
         }
 
         .libelle {
@@ -67,8 +71,12 @@
 
     &__row.head {
         font-weight: bold;
-        background-color: hsl(171, 74%, 71%);
+        background-color: #3E63DD;
         font-size: 1.1rem;
+
+        p {
+            color:white;
+        }
     }
 
     .empty {

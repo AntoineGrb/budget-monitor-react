@@ -61,13 +61,13 @@ const Budget = ({setIsEditSalaryOpen}) => {
     const handleProgressBarColor = () => {
         //Calcul du ratio entre les dépenses du mois et les entrées en argent        
         if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.7) {
-            return 'hsl(171, 100%, 41%)'
+            return '#ABBDF9'
         }
         else if ((calculateFilteredAmount() / (getMonthIncomes().salary)) < 0.9) {
-            return 'hsl(48, 100%, 67%)'
+            return '#E4C767'
         }
         else {
-            return 'hsl(348, 100%, 61%)'
+            return '#EB8E90'
         }
     }
 
