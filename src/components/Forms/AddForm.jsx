@@ -59,7 +59,7 @@ const AddForm = ({setIsAddDepenseOpen}) => {
     //Fermeture de la modale après soumission
     const closeModal = () => {
         //Rénitialiser et fermer le formulaire
-        setDepenseDate('2023-12-01'); //! Calcul et mettre la date du jour
+        setDepenseDate(formatTodayDate());
         setDepenseLibelle('');
         setDepenseTag('Autres');
         setDepenseAmount(1);
